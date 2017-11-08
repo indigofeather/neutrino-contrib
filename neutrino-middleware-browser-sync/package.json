@@ -1,0 +1,25 @@
+{
+  "name": "neutrino-middleware-browser-sync",
+  "version": "1.1.1",
+  "description": "Neutrino middleware for BrowserSync",
+  "keywords": [
+    "browser-sync",
+    "neutrino",
+    "neutrino-middleware"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Lance He (a.k.a. indigofeather)",
+    "email": "indigofeather@gmail.com"
+  },
+  "main": "src/index.js",
+  "repository": "https://github.com/indigofeather/neutrino-contrib/tree/master/neutrino-middleware-browser-sync",
+  "dependencies": {
+    "browser-sync": "^2.18.13",
+    "browser-sync-webpack-plugin": "^1.2.0",
+    "deepmerge": "^1.5.2"
+  },
+  "peerDependencies": {
+    "neutrino": "^7.0.0"
+  }
+}

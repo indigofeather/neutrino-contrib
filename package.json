@@ -1,0 +1,37 @@
+{
+  "name": "neutrino-contrib",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A collection of neutrino packages.",
+  "license": "MIT",
+  "author": {
+    "name": "Lance He (a.k.a. indigofeather)",
+    "email": "indigofeather@gmail.com"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:indigofeather/neutrino-contrib.git"
+  },
+  "scripts": {
+    "lint": "neutrino lint"
+  },
+  "devDependencies": {
+    "neutrino": "7.2.3",
+    "prettier": "^1.8.1"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "workspaces": [
+    "neutrino-middleware-browser-sync",
+    "neutrino-middleware-uglifyjs",
+    "neutrino-preset-laima-react",
+    "neutrino-middleware-case-sensitive-paths",
+    "neutrino-preset-eslint-l3e",
+    "neutrino-preset-laima-web",
+    "neutrino-middleware-compression",
+    "neutrino-preset-eslint-l3e-base",
+    "neutrino-preset-stylelint-l3e"
+  ]
+}

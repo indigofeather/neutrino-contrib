@@ -1,0 +1,37 @@
+{
+  "name": "neutrino-preset-laima-react",
+  "version": "1.2.1",
+  "description": "Neutrino preset for laima project",
+  "keywords": [
+    "laima",
+    "neutrino",
+    "neutrino-preset"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Lance He (a.k.a. indigofeather)",
+    "email": "indigofeather@gmail.com"
+  },
+  "main": "src/index.js",
+  "repository": "https://github.com/indigofeather/neutrino-contrib/tree/master/neutrino-preset-laima-react",
+  "scripts": {
+    "test": "ava test"
+  },
+  "dependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-classes": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-react": "^6.24.1",
+    "deepmerge": "^1.5.2",
+    "neutrino-middleware-compile-loader": "^7.3.0",
+    "neutrino-preset-laima-web": "^1.2.0",
+    "react-hot-loader": "^3.1.1",
+    "webpack": "^3.8.1"
+  },
+  "devDependencies": {
+    "ava": "^0.23.0"
+  },
+  "peerDependencies": {
+    "neutrino": "^7.0.0"
+  }
+}

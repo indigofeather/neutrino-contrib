@@ -1,0 +1,26 @@
+{
+  "name": "neutrino-preset-eslint-l3e",
+  "version": "1.0.2",
+  "description": "Neutrino preset for adding l3e's ESLint config",
+  "keywords": [
+    "eslint",
+    "l3e",
+    "neutrino",
+    "neutrino-preset"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Lance He (a.k.a. indigofeather)",
+    "email": "indigofeather@gmail.com"
+  },
+  "main": "src/index.js",
+  "repository": "https://github.com/indigofeather/neutrino-contrib/tree/master/neutrino-preset-eslint-l3e",
+  "dependencies": {
+    "deepmerge": "^1.5.2",
+    "eslint-config-l3e": "^4.4.1",
+    "neutrino-middleware-eslint": "^7.3.0"
+  },
+  "peerDependencies": {
+    "neutrino": "^7.0.0"
+  }
+}

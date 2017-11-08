@@ -1,0 +1,24 @@
+{
+  "name": "neutrino-middleware-compression",
+  "version": "1.0.1",
+  "description": "Neutrino middleware for compression",
+  "keywords": [
+    "compression",
+    "neutrino",
+    "neutrino-middleware"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Lance He (a.k.a. indigofeather)",
+    "email": "indigofeather@gmail.com"
+  },
+  "main": "src/index.js",
+  "repository": "https://github.com/indigofeather/neutrino-contrib/tree/master/neutrino-middleware-compression",
+  "dependencies": {
+    "compression-webpack-plugin": "^1.0.1",
+    "deepmerge": "^1.5.2"
+  },
+  "peerDependencies": {
+    "neutrino": "^7.0.0"
+  }
+}

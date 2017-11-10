@@ -1,6 +1,6 @@
 {
   "name": "neutrino-preset-stylelint-l3e",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Neutrino preset for adding l3e's Stylelint config",
   "keywords": [
     "stylelint",

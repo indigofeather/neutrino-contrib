@@ -16,7 +16,7 @@
   "main": "src/index.js",
   "repository": "https://github.com/indigofeather/neutrino-contrib/tree/master/neutrino-preset-stylelint-l3e",
   "dependencies": {
-    "deepmerge": "^1.5.2",
+    "deepmerge": "^2.0.1",
     "neutrino-middleware-stylelint": "^4.0.0-rc.2",
     "stylelint-config-l3e": "^1.7.4"
   },

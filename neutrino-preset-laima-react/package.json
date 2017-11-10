@@ -1,6 +1,6 @@
 {
   "name": "neutrino-preset-laima-react",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Neutrino preset for laima project",
   "keywords": [
     "laima",
@@ -22,7 +22,7 @@
     "babel-plugin-transform-es2015-classes": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-react": "^6.24.1",
-    "deepmerge": "^1.5.2",
+    "deepmerge": "^2.0.1",
     "neutrino-middleware-compile-loader": "^7.3.0",
     "neutrino-preset-laima-web": "^1.2.0",
     "react-hot-loader": "^3.1.1",

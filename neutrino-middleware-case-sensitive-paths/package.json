@@ -16,7 +16,7 @@
   "repository": "https://github.com/indigofeather/neutrino-contrib/tree/master/neutrino-middleware-case-sensitive-paths",
   "dependencies": {
     "case-sensitive-paths-webpack-plugin": "^2.1.1",
-    "deepmerge": "^1.5.2"
+    "deepmerge": "^2.0.1"
   },
   "peerDependencies": {
     "neutrino": "^7.0.0"

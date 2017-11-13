@@ -4988,9 +4988,9 @@ neutrino-preset-extractstyles@^2.0.0-rc.1:
   dependencies:
     extract-text-webpack-plugin "^3.0.0"
 
-neutrino@7.2.3:
-  version "7.2.3"
-  resolved "https://registry.yarnpkg.com/neutrino/-/neutrino-7.2.3.tgz#f9c9385b5ce347faa54967d80d1785c39de2e68c"
+neutrino@7.3.2:
+  version "7.3.2"
+  resolved "https://registry.yarnpkg.com/neutrino/-/neutrino-7.3.2.tgz#086a0d192113adabd261ed4035cfb26644c7c58e"
   dependencies:
     deep-sort-object "^1.0.2"
     deepmerge "^1.5.2"

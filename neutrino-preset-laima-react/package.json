@@ -23,7 +23,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-react": "^6.24.1",
     "deepmerge": "^2.0.1",
-    "neutrino-middleware-compile-loader": "^7.3.0",
+    "neutrino-middleware-compile-loader": "^7.3.2",
     "neutrino-preset-laima-web": "^1.2.0",
     "react-hot-loader": "^3.1.1",
     "webpack": "^3.8.1"

@@ -18,7 +18,7 @@
   "dependencies": {
     "deepmerge": "^2.0.1",
     "neutrino-middleware-stylelint": "^4.0.0-rc.2",
-    "stylelint-config-l3e": "^1.7.4"
+    "stylelint-config-l3e": "^2.0.0"
   },
   "peerDependencies": {
     "neutrino": "^7.0.0"

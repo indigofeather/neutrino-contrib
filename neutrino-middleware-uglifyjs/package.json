@@ -1,6 +1,6 @@
 {
   "name": "neutrino-middleware-uglifyjs",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Neutrino middleware for UglifyJS",
   "keywords": [
     "uglifyjs",
@@ -12,13 +12,13 @@
     "name": "Lance He (a.k.a. indigofeather)",
     "email": "indigofeather@gmail.com"
   },
-  "main": "src/index.js",
+  "main": "index.js",
   "repository": "https://github.com/indigofeather/neutrino-contrib/tree/master/neutrino-middleware-uglifyjs",
   "dependencies": {
     "deepmerge": "^2.0.1",
     "uglifyjs-webpack-plugin": "^1.1.2"
   },
   "peerDependencies": {
-    "neutrino": "^7.0.0"
+    "neutrino": "^8.0.0"
   }
 }

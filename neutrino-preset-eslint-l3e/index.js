@@ -1,4 +1,4 @@
-const lint = require('neutrino-middleware-eslint')
+const lint = require('@neutrinojs/eslint')
 const merge = require('deepmerge')
 
 module.exports = (neutrino, opts = {}) => {

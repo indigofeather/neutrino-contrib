@@ -17,8 +17,8 @@
     "lint": "neutrino lint"
   },
   "devDependencies": {
-    "neutrino": "^7.3.3",
-    "prettier": "^1.8.1"
+    "neutrino": "^8.0.0",
+    "prettier": "^1.9.1"
   },
   "engines": {
     "node": ">=6"

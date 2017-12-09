@@ -1,37 +1,37 @@
 const { join, resolve } = require('path')
 const merge = require('deepmerge')
 const git = require('git-rev-sync')
-const ScriptExtHtmlPlugin = require('script-ext-html-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const { optimize } = require('webpack')
-const htmlLoader = require('neutrino-middleware-html-loader')
-const styleLoader = require('neutrino-middleware-style-loader')
-const fontLoader = require('neutrino-middleware-font-loader')
-const imageLoader = require('neutrino-middleware-image-loader')
-const compileLoader = require('neutrino-middleware-compile-loader')
-const env = require('neutrino-middleware-env')
-const hot = require('neutrino-middleware-hot')
-const htmlTemplate = require('neutrino-middleware-html-template')
-const copy = require('neutrino-middleware-copy')
-const clean = require('neutrino-middleware-clean')
-const uglify = require('neutrino-middleware-uglifyjs')
-const loaderMerge = require('neutrino-middleware-loader-merge')
-const devServer = require('neutrino-middleware-dev-server')
-const extractstyles = require('neutrino-preset-extractstyles')
-const pwa = require('neutrino-middleware-pwa')
+const htmlLoader = require('@neutrinojs/html-loader')
+const styleLoader = require('@neutrinojs/style-loader')
+const fontLoader = require('@neutrinojs/font-loader')
+const imageLoader = require('@neutrinojs/image-loader')
+const compileLoader = require('@neutrinojs/compile-loader')
+const env = require('@neutrinojs/env')
+const hot = require('@neutrinojs/hot')
+const htmlTemplate = require('@neutrinojs/html-template')
+const copy = require('@neutrinojs/copy')
+const clean = require('@neutrinojs/clean')
+const minify = require('@neutrinojs/minify')
+const loaderMerge = require('@neutrinojs/loader-merge')
+const devServer = require('@neutrinojs/dev-server')
+const pwa = require('@neutrinojs/pwa')
 const compression = require('neutrino-middleware-compression')
 const bundleanalyzer = require('neutrino-middleware-bundleanalyzer')
-const optimizecss = require('neutrino-middleware-optimizecss')
 const caseSensitivePaths = require('neutrino-middleware-case-sensitive-paths')
 const browserSync = require('neutrino-middleware-browser-sync')
 
 const MODULES = join(__dirname, 'node_modules')
 
 module.exports = (neutrino, opts = {}) => {
+  const publicPath = './'
   const options = merge(
     {
+      publicPath,
       env: [],
       hot: true,
+      hotEntries: [],
       html: {
         title: 'Laima Web App',
         template: resolve(__dirname, 'template.ejs'),
@@ -41,23 +41,63 @@ module.exports = (neutrino, opts = {}) => {
           preserveLineBreaks: false
         }
       },
-      devServer: {
-        port: 3100,
-        hot: opts.hot !== false
-      },
       polyfills: {
         async: true
       },
+      devServer: {
+        port: 3100,
+        hot: opts.hot !== false,
+        publicPath: resolve('/', publicPath)
+      },
+      style: {
+        hot: opts.hot !== false,
+        extract: (opts.style && opts.style.extract) || (process.env.NODE_ENV === 'production' && {}),
+        css: {
+          localIdentName: '[name]__[local]--[hash:base64:5]'
+        }
+      },
+      clean: opts.clean !== false && {
+        paths: [neutrino.options.output]
+      },
+      minify: {
+        babel: {},
+        style: {},
+        image: false
+      },
       babel: {},
-      cssModules: false,
-      css: {
-        localIdentName: '[name]__[local]--[hash:base64:5]'
-      }
+      targets: {},
+      font: {},
+      image: {}
     },
     opts
   )
 
+  if (typeof options.devServer.proxy === 'string') {
+    options.devServer.proxy = {
+      '**': {
+        target: options.devServer.proxy,
+        changeOrigin: true
+      }
+    }
+  }
+
+  if (!options.targets.node && !options.targets.browsers) {
+    options.targets.browsers = [
+      'last 2 Chrome versions',
+      'last 2 Firefox versions',
+      'last 2 Edge versions',
+      'last 2 Opera versions',
+      'last 2 Safari versions',
+      'last 2 iOS versions'
+    ]
+  }
+
   Object.assign(options, {
+    minify: {
+      babel: options.minify.babel === true ? {} : options.minify.babel,
+      style: options.minify.style === true ? {} : options.minify.style,
+      image: options.minify.image === true ? {} : options.minify.image
+    },
     babel: compileLoader.merge(
       {
         plugins: [
@@ -73,9 +113,7 @@ module.exports = (neutrino, opts = {}) => {
               modules: false,
               useBuiltIns: true,
               exclude: options.polyfills.async ? ['transform-regenerator', 'transform-async-to-generator'] : [],
-              targets: {
-                browsers: []
-              }
+              targets: options.targets
             }
           ]
         ]
@@ -83,29 +121,11 @@ module.exports = (neutrino, opts = {}) => {
       options.babel
     )
   })
-  options.css.modules = options.cssModules
 
   const staticDir = join(neutrino.options.source, 'static')
-  const presetEnvOptions = options.babel.presets[0][1]
-
-  if (!presetEnvOptions.targets.browsers.length) {
-    presetEnvOptions.targets.browsers.push(
-      'last 2 Chrome versions',
-      'last 2 Firefox versions',
-      'last 2 Edge versions',
-      'last 2 Opera versions',
-      'last 2 Safari versions',
-      'last 2 iOS versions'
-    )
-  }
 
   neutrino.use(env, options.env)
   neutrino.use(htmlLoader)
-  neutrino.use(styleLoader, {
-    css: options.css
-  })
-  neutrino.use(fontLoader)
-  neutrino.use(imageLoader)
   neutrino.use(htmlTemplate, options.html)
   neutrino.use(compileLoader, {
     include: [neutrino.options.source, neutrino.options.tests],
@@ -113,7 +133,6 @@ module.exports = (neutrino, opts = {}) => {
     babel: options.babel
   })
   neutrino.use(bundleanalyzer)
-  neutrino.use(optimizecss)
   neutrino.use(caseSensitivePaths)
   neutrino.use(copy, {
     patterns: [
@@ -136,23 +155,36 @@ module.exports = (neutrino, opts = {}) => {
     ]
   })
 
+  Object.keys(neutrino.options.mains).forEach(key => {
+    neutrino.config.entry(key).add(neutrino.options.mains[key])
+    neutrino.use(
+      htmlTemplate,
+      merge(
+        {
+          pluginId: `html-${key}`,
+          filename: `${key}.html`
+        },
+        options.html
+      )
+    )
+  })
+
   neutrino.config
+    .when(options.style, () => neutrino.use(styleLoader, options.style))
+    .when(options.font, () => neutrino.use(fontLoader, options.font))
+    .when(options.image, () => neutrino.use(imageLoader, options.image))
     .target('web')
     .context(neutrino.options.root)
-    .entry('index')
-    .add(neutrino.options.entry)
-    .end()
     .output.path(neutrino.options.output)
-    .publicPath('./')
+    .publicPath(options.publicPath)
     .filename('[name].js')
-    .chunkFilename('[name].js')
+    .chunkFilename('[name].[chunkhash].js')
     .end()
     .resolve.modules.add('node_modules')
     .add(neutrino.options.node_modules)
     .add(MODULES)
     .end()
-    .extensions.add('.js')
-    .add('.json')
+    .extensions.merge(neutrino.options.extensions.concat('json').map(ext => `.${ext}`))
     .end()
     .end()
     .resolveLoader.modules.add(neutrino.options.node_modules)
@@ -163,27 +195,34 @@ module.exports = (neutrino, opts = {}) => {
     .set('fs', 'empty')
     .set('tls', 'empty')
     .end()
-    .plugin('script-ext')
-    .use(ScriptExtHtmlPlugin, [{ defaultAttribute: 'defer' }])
-    .end()
     .plugin('lodash')
     .use(LodashModuleReplacementPlugin)
     .end()
     .module.rule('worker')
-    .test(/\.worker\.js$/)
+    .test(neutrino.regexFromExtensions(neutrino.options.extensions.map(ext => `worker.${ext}`)))
     .use('worker')
     .loader(require.resolve('worker-loader'))
     .end()
     .end()
     .end()
-    .when(neutrino.config.module.rules.has('lint'), () =>
-      neutrino.use(loaderMerge('lint', 'eslint'), {
-        envs: ['browser', 'commonjs']
-      })
-    )
+    .when(neutrino.config.module.rules.has('lint'), () => {
+      neutrino.use(loaderMerge('lint', 'eslint'), { envs: ['browser', 'commonjs'] })
+    })
     .when(process.env.NODE_ENV === 'development', config => config.devtool('cheap-module-eval-source-map'))
     .when(neutrino.options.command === 'start', config => {
-      config.when(options.hot, () => neutrino.use(hot))
+      config.when(options.hot, () => {
+        neutrino.use(hot)
+        config.when(options.hotEntries, c => {
+          Object.keys(neutrino.options.mains).forEach(key => {
+            c.entry(key).batch(entry => {
+              options.hotEntries.forEach(hotEntry => entry.prepend(hotEntry))
+              entry
+                .prepend(require.resolve('webpack/hot/dev-server'))
+                .prepend(`${require.resolve('webpack-dev-server/client')}?/`)
+            })
+          })
+        })
+      })
       neutrino.use(devServer, options.devServer)
       neutrino.use(browserSync, {
         browserSyncOptions: {
@@ -200,8 +239,8 @@ module.exports = (neutrino, opts = {}) => {
         }
       })
     })
-    .when(process.env.NODE_ENV === 'production', () => {
-      neutrino.config
+    .when(process.env.NODE_ENV === 'production', config => {
+      config
         .plugin('vendor-chunk')
         .use(optimize.CommonsChunkPlugin, [
           {
@@ -213,17 +252,14 @@ module.exports = (neutrino, opts = {}) => {
         .plugin('runtime-chunk')
         .use(optimize.CommonsChunkPlugin, [
           {
-            name: 'manifest',
+            name: 'runtime',
             minChunks: Infinity
           }
         ])
         .end()
+        .when(options.minify, () => neutrino.use(minify, options.minify))
         .plugin('module-concat')
         .use(optimize.ModuleConcatenationPlugin)
-        .end()
-      neutrino.use(uglify, {
-        parallel: true
-      })
       neutrino.use(pwa, {
         updateStrategy: 'changed',
         autoUpdate: true,
@@ -236,15 +272,7 @@ module.exports = (neutrino, opts = {}) => {
       neutrino.use(compression)
     })
     .when(neutrino.options.command === 'build', config => {
-      neutrino.use(clean, { paths: [neutrino.options.output] })
-      config.output.filename('[name]-[chunkhash:7].js')
+      config.when(options.clean, () => neutrino.use(clean, options.clean))
+      config.output.filename('[name].[chunkhash].js')
     })
-  neutrino.on('prebuild', () => {
-    neutrino.use(extractstyles, {
-      plugin: {
-        filename: '[name]-[contenthash:7].css',
-        allChunks: true
-      }
-    })
-  })
 }

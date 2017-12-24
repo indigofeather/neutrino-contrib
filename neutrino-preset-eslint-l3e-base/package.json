@@ -16,9 +16,9 @@
   "main": "index.js",
   "repository": "https://github.com/indigofeather/neutrino-contrib/tree/master/neutrino-preset-eslint-l3e-base",
   "dependencies": {
-    "@neutrinojs/eslint": "^8.0.8",
+    "@neutrinojs/eslint": "^8.0.14",
     "deepmerge": "^2.0.1",
-    "eslint-config-l3e-base": "^2.4.0"
+    "eslint-config-l3e-base": "^2.5.0"
   },
   "peerDependencies": {
     "neutrino": "^8.0.0"

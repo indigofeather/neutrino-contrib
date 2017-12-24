@@ -156,17 +156,21 @@ module.exports = (neutrino, opts = {}) => {
   })
 
   Object.keys(neutrino.options.mains).forEach(key => {
-    neutrino.config.entry(key).add(neutrino.options.mains[key])
-    neutrino.use(
-      htmlTemplate,
-      merge(
-        {
-          pluginId: `html-${key}`,
-          filename: `${key}.html`
-        },
-        options.html
-      )
-    )
+    neutrino.config
+      .entry(key)
+      .add(neutrino.options.mains[key])
+      .when(options.html, () => {
+        neutrino.use(
+          htmlTemplate,
+          merge(
+            {
+              pluginId: `html-${key}`,
+              filename: `${key}.html`
+            },
+            options.html
+          )
+        )
+      })
   })
 
   neutrino.config

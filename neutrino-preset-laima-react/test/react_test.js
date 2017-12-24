@@ -2,7 +2,7 @@ import test from 'ava'
 import { validate } from 'webpack'
 import { Neutrino } from 'neutrino'
 
-const preset = require('../src/index')
+const preset = require('../index')
 
 test('loads preset', t => {
   t.notThrows(() => preset)

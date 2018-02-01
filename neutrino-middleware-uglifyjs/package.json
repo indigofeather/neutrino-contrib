@@ -3,9 +3,9 @@
   "version": "2.0.0",
   "description": "Neutrino middleware for UglifyJS",
   "keywords": [
-    "uglifyjs",
     "neutrino",
-    "neutrino-middleware"
+    "neutrino-middleware",
+    "uglifyjs"
   ],
   "license": "MIT",
   "author": {
@@ -20,5 +20,10 @@
   },
   "peerDependencies": {
     "neutrino": "^8.0.0"
+  },
+  "engines": {
+    "node": "^6.9.0 || ^8 || >=9",
+    "npm": ">=5.4.0",
+    "yarn": ">=1.2.1"
   }
 }

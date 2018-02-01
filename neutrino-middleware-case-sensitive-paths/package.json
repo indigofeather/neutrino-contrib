@@ -1,6 +1,6 @@
 {
   "name": "neutrino-middleware-case-sensitive-paths",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Neutrino middleware for enforces module path case sensitivity",
   "keywords": [
     "case sensitive",

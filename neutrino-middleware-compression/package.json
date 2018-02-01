@@ -1,6 +1,6 @@
 {
   "name": "neutrino-middleware-compression",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Neutrino middleware for compression",
   "keywords": [
     "compression",

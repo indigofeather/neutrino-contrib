@@ -15,7 +15,7 @@
   "main": "index.js",
   "repository": "https://github.com/indigofeather/neutrino-contrib/tree/master/neutrino-middleware-browser-sync",
   "dependencies": {
-    "browser-sync": "^2.21.0",
+    "browser-sync": "^2.23.6",
     "browser-sync-webpack-plugin": "^1.2.0",
     "deepmerge": "^2.0.1"
   },

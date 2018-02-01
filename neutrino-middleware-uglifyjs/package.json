@@ -16,7 +16,7 @@
   "repository": "https://github.com/indigofeather/neutrino-contrib/tree/master/neutrino-middleware-uglifyjs",
   "dependencies": {
     "deepmerge": "^2.0.1",
-    "uglifyjs-webpack-plugin": "^1.1.2"
+    "uglifyjs-webpack-plugin": "^1.1.8"
   },
   "peerDependencies": {
     "neutrino": "^8.0.0"

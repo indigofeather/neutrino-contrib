@@ -1,6 +1,6 @@
 {
   "name": "neutrino-preset-stylelint-l3e",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Neutrino preset for adding l3e's Stylelint config",
   "keywords": [
     "stylelint",
@@ -13,14 +13,14 @@
     "name": "Lance He (a.k.a. indigofeather)",
     "email": "indigofeather@gmail.com"
   },
-  "main": "src/index.js",
+  "main": "index.js",
   "repository": "https://github.com/indigofeather/neutrino-contrib/tree/master/neutrino-preset-stylelint-l3e",
   "dependencies": {
+    "@neutrinojs/stylelint": "^8.1.1",
     "deepmerge": "^2.0.1",
-    "neutrino-middleware-stylelint": "^4.0.0-rc.2",
     "stylelint-config-l3e": "^2.0.0"
   },
   "peerDependencies": {
-    "neutrino": "^7.0.0"
+    "neutrino": "^8.0.0"
   }
 }

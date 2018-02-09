@@ -1,0 +1,39 @@
+{
+  "name": "neutrino-preset-laima-antd",
+  "version": "0.1.0",
+  "description": "Neutrino preset for laima project",
+  "keywords": [
+    "laima",
+    "neutrino",
+    "neutrino-preset"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Lance He (a.k.a. indigofeather)",
+    "email": "indigofeather@gmail.com"
+  },
+  "main": "index.js",
+  "repository": "https://github.com/indigofeather/neutrino-contrib/tree/master/neutrino-preset-laima-antd",
+  "scripts": {
+    "test": "ava test"
+  },
+  "dependencies": {
+    "@neutrinojs/compile-loader": "^8.1.1",
+    "babel-plugin-import": "^1.6.3",
+    "deepmerge": "^2.0.1",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "neutrino-preset-laima-react": "^2.0.1"
+  },
+  "devDependencies": {
+    "ava": "^0.25.0"
+  },
+  "peerDependencies": {
+    "neutrino": "^8.0.0"
+  },
+  "engines": {
+    "node": "^6.9.0 || ^8 || >=9",
+    "npm": ">=5.4.0",
+    "yarn": ">=1.2.1"
+  }
+}

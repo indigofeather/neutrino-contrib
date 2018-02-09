@@ -1,10 +1,31 @@
 const react = require('neutrino-preset-laima-react')
 const compileLoader = require('@neutrinojs/compile-loader')
 const merge = require('deepmerge')
+const { join, resolve } = require('path')
+
+const getTheme = () => {
+  const cwd = process.cwd()
+  const pkg = require(join(cwd, 'package.json'))
+
+  if (pkg.theme && typeof pkg.theme === 'string') {
+    let cfgPath = pkg.theme
+
+    // relative path
+    if (pkg.theme.charAt(0) === '.') {
+      cfgPath = resolve(cwd, cfgPath)
+    }
+
+    return require(cfgPath)()
+  }
+
+  if (pkg.theme && typeof pkg.theme === 'object') {
+    return pkg.theme
+  }
+
+  return {}
+}
 
 module.exports = (neutrino, opts = {}) => {
-  const theme = opts.theme ? opts.theme() : {}
-
   const options = merge(
     {
       style: {
@@ -14,7 +35,7 @@ module.exports = (neutrino, opts = {}) => {
             loader: require.resolve('less-loader'),
             useId: 'less',
             options: {
-              modifyVars: theme
+              modifyVars: getTheme()
             }
           }
         ]

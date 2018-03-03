@@ -1,6 +1,6 @@
 {
   "name": "neutrino-preset-eslint-l3e-base",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Neutrino preset for adding l3e's ESLint config",
   "keywords": [
     "eslint",

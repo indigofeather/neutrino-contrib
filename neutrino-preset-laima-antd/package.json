@@ -1,6 +1,6 @@
 {
   "name": "neutrino-preset-laima-antd",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Neutrino preset for laima project",
   "keywords": [
     "laima",
@@ -23,7 +23,7 @@
     "babel-plugin-import": "^1.6.5",
     "less": "^2.7.3",
     "less-loader": "^4.0.6",
-    "neutrino-preset-laima-react": "^2.0.1"
+    "neutrino-preset-laima-react": "^2.0.2"
   },
   "devDependencies": {
     "ava": "^0.25.0"

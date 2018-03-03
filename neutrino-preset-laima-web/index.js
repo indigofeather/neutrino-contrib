@@ -54,7 +54,19 @@ module.exports = (neutrino, opts = {}) => {
         extract: (opts.style && opts.style.extract) || (process.env.NODE_ENV === 'production' && {}),
         css: {
           localIdentName: '[name]__[local]--[hash:base64:5]'
-        }
+        },
+        modulesTest: /\.css$/,
+        loaders: [
+          {
+            loader: require.resolve('postcss-loader'),
+            useId: 'postcss',
+            options: {
+              config: {
+                path: join(process.cwd(), 'postcss.config.js')
+              }
+            }
+          }
+        ]
       },
       clean: opts.clean !== false && {
         paths: [neutrino.options.output]

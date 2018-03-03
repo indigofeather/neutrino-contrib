@@ -18,11 +18,11 @@
     "test": "ava test"
   },
   "dependencies": {
-    "@neutrinojs/compile-loader": "^8.1.1",
+    "@neutrinojs/compile-loader": "^8.1.2",
     "@neutrinojs/style-loader": "^8.1.2",
-    "babel-plugin-import": "^1.6.3",
+    "babel-plugin-import": "^1.6.5",
     "less": "^2.7.3",
-    "less-loader": "^4.0.5",
+    "less-loader": "^4.0.6",
     "neutrino-preset-laima-react": "^2.0.1"
   },
   "devDependencies": {

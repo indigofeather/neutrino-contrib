@@ -30,6 +30,7 @@
     "neutrino-middleware-case-sensitive-paths",
     "neutrino-preset-eslint-l3e",
     "neutrino-preset-laima-web",
+    "neutrino-preset-laima-antd",
     "neutrino-middleware-compression",
     "neutrino-preset-eslint-l3e-base",
     "neutrino-preset-stylelint-l3e"

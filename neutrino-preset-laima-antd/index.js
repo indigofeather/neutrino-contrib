@@ -1,6 +1,6 @@
 const react = require('neutrino-preset-laima-react')
 const compileLoader = require('@neutrinojs/compile-loader')
-const merge = require('deepmerge')
+const styles = require('@neutrinojs/style-loader')
 const { join, resolve } = require('path')
 
 const getTheme = () => {
@@ -26,32 +26,34 @@ const getTheme = () => {
 }
 
 module.exports = (neutrino, opts = {}) => {
-  const options = merge(
-    {
-      style: {
-        test: neutrino.regexFromExtensions(['css', 'less']),
-        loaders: [
-          {
-            loader: require.resolve('less-loader'),
-            useId: 'less',
-            options: {
-              modifyVars: getTheme()
-            }
-          }
-        ]
+  neutrino.use(styles, {
+    loaders: [
+      {
+        loader: require.resolve('less-loader'),
+        useId: 'less',
+        options: {
+          modifyVars: getTheme()
+        }
       }
+    ],
+    test: /\.less$/,
+    ruleId: 'less-style',
+    hot: opts.hot !== false,
+    extract: (opts.style && opts.style.extract) || (process.env.NODE_ENV === 'production' && {}),
+    css: {
+      localIdentName: '[name]__[local]--[hash:base64:5]'
     },
-    opts
-  )
+    modulesTest: /modules.less$/
+  })
 
-  Object.assign(options, {
+  Object.assign(opts, {
     babel: compileLoader.merge(
       {
         plugins: [[require.resolve('babel-plugin-import'), [{ libraryName: 'antd', style: true }]]]
       },
-      options.babel
+      opts.babel
     )
   })
 
-  neutrino.use(react, options)
+  neutrino.use(react, opts)
 }

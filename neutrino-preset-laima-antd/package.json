@@ -19,8 +19,8 @@
   },
   "dependencies": {
     "@neutrinojs/compile-loader": "^8.1.1",
+    "@neutrinojs/style-loader": "^8.1.2",
     "babel-plugin-import": "^1.6.3",
-    "deepmerge": "^2.0.1",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "neutrino-preset-laima-react": "^2.0.1"

@@ -1,6 +1,6 @@
 {
   "name": "neutrino-preset-laima-web",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Neutrino preset for laima project",
   "keywords": [
     "laima",
@@ -42,7 +42,7 @@
     "neutrino-middleware-browser-sync": "^2.1.0",
     "neutrino-middleware-bundleanalyzer": "^2.0.0",
     "neutrino-middleware-case-sensitive-paths": "^2.0.1",
-    "neutrino-middleware-compression": "^2.0.2",
+    "neutrino-middleware-compression": "^2.0.3",
     "postcss-loader": "^2.1.1",
     "webpack": "^3.11.0",
     "worker-loader": "^1.1.1"
